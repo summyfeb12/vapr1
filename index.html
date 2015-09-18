@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0" charset="utf-8">
 <style>
 
 .bar {
@@ -29,8 +29,8 @@
 }
 
 </style>
-<div id="area1" style="width: 4000px; float: left;"></div>
-<div id="area2" style="margin-left: 4020px;"></div>
+<div id="area1" style="width: 2000px; float: left;"></div>
+<div id="area2" style="margin-left: 2020px;"></div>
 <select id="state">
     <option value="0">United States</option>
 	<option value="1">Alabama</option>
@@ -114,8 +114,8 @@ var svg = d3.select("#area1").append("svg")
    .append("g")
     .attr("transform", "translate(" + margin.left + "," + margin.top + ")");   
     
-var width2 = 2000,
-    height2 = 2000,
+var width2 = 1000,
+    height2 = 1000,
     radius = Math.min(width, height) / 2;
 
 var color = d3.scale.category20c();

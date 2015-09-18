@@ -91,7 +91,7 @@
 
 var margin = {top: 20, right: 20, bottom: 30, left: 40},
     width = 2000 - margin.left - margin.right,
-    height =2000 - margin.top - margin.bottom;
+    height =800 - margin.top - margin.bottom;
 
 var x = d3.scale.ordinal()
     .rangeRoundBands([0, width], 0.2);
@@ -115,7 +115,7 @@ var svg = d3.select("#area1").append("svg")
     .attr("transform", "translate(" + margin.left + "," + margin.top + ")");   
     
 var width2 = 1000,
-    height2 = 1000,
+    height2 =500,
     radius = Math.min(width, height) / 2;
 
 var color = d3.scale.category20c();
@@ -139,7 +139,7 @@ var svg2 = d3.select("#area2").append("svg")
       .call(yAxis)
       .append("text")
       .attr("transform", "rotate(-90)")
-      .attr("dy", "-3em")
+      .attr("dy", "-3px")
       .style("text-anchor", "end")
       .text("Population");
 
@@ -194,7 +194,7 @@ function upd(st)
   
   g2.append("text")
       .attr("transform", function(d) { return "translate(" + arc.centroid(d) + ")"; })
-      .attr("dy", ".35em")
+      .attr("dy", ".35px")
       .style("text-anchor", "middle")
       .text(function(d) { return d.data.age; }); 
 }

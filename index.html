@@ -29,8 +29,8 @@
 }
 
 </style>
-<div id="area1" style="width: 1200px; float: left;"></div>
-<div id="area2" style="margin-left: 1220px;"></div>
+<div id="area1" style="width: 4000px; float: left;"></div>
+<div id="area2" style="margin-left: 4020px;"></div>
 <select id="state">
     <option value="0">United States</option>
 	<option value="1">Alabama</option>
@@ -90,8 +90,8 @@
 <script>
 
 var margin = {top: 20, right: 20, bottom: 30, left: 40},
-    width = 1200 - margin.left - margin.right,
-    height = 500 - margin.top - margin.bottom;
+    width = 4000 - margin.left - margin.right,
+    height =1000 - margin.top - margin.bottom;
 
 var x = d3.scale.ordinal()
     .rangeRoundBands([0, width], 0.2);
@@ -114,8 +114,8 @@ var svg = d3.select("#area1").append("svg")
    .append("g")
     .attr("transform", "translate(" + margin.left + "," + margin.top + ")");   
     
-var width2 = 960,
-    height2 = 500,
+var width2 = 2000,
+    height2 = 2000,
     radius = Math.min(width, height) / 2;
 
 var color = d3.scale.category20c();

@@ -1,0 +1,972 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<head><script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script></head>
+<style>
+
+.bar {
+  fill: steelblue;
+}
+.axis {
+  font: 15px sans-serif;
+}
+
+.axis path,
+.axis line {
+  fill: none;
+  stroke: #000;
+  shape-rendering: crispEdges;
+}
+.axis .minor line {
+  stroke: #777;
+  stroke-dasharray: 2,2;
+
+.x.axis path {
+  display: none;
+}
+</style>
+<style type="text/css">
+    .section {
+	clear: both;
+	padding: 0px;
+	margin: 0px;
+}
+
+/*  COLUMN SETUP  */
+.col {
+	display: block;
+	float:left;
+	margin: 1% 0 1% 1.6%;
+}
+.col:first-child { margin-left: 0; }
+
+/*  GROUPING  */
+.group:before,
+.group:after { content:""; display:table; }
+.group:after { clear:both;}
+.group { zoom:1; /* For IE 6/7 */ }
+/*  GRID OF THREE  */
+.span_3_of_3 { width: 100%; }
+.span_2_of_3 { width: 66.13%; }
+.span_1_of_3 { width: 32.26%; }
+
+/*  GO FULL WIDTH BELOW 480 PIXELS */
+@media only screen and (max-width: 480px) {
+	.col {  margin: 1% 0 1% 0%; }
+	.span_3_of_3, .span_2_of_3, .span_1_of_3 { width: 100%; }
+}
+</style>
+<div id="header" style="width: 100%; height: 1vh;font-size: 20px; text-align: center;">Population and Events</div>
+<div id="container" class="section group">
+<div id="part1" class="col span_1_of_3">
+ <div id="area1" style="width: 100%; height: 40vh;padding-top: 0vh"></div>
+ <div id="area2" style="width: 100%; height: 46vh; padding-top: 4vh;"></div>
+ <div id="ctrl1" style="width: 100%; height: 2vh;padding-top:0;">
+<input type="checkbox" id="opt1" style="font-size:20px"> Ages Grouped<br>
+<select id="year">
+    <option value="0">Population 2010</option>
+    <option value="1">Population 2011</option>
+    <option value="2">Population 2012</option>
+    <option value="3">Population 2013</option> 
+    <option value="4">Population 2014</option>
+</select>
+<select id="state">
+    <option value="0">United States</option>
+	<option value="1">Alabama</option>
+	<option value="2">Alaska</option>
+	<option value="3">Arizona</option>
+	<option value="5">Arkansas</option>
+	<option value="6">California</option>
+	<option value="8">Colorado</option>
+	<option value="9">Connecticut</option>
+	<option value="10">Delaware</option>
+	<option value="11">District of Columbia</option>
+	<option value="12">Florida</option>
+	<option value="13">Georgia</option>
+	<option value="15">Hawaii</option>
+	<option value="16">Idaho</option>
+	<option value="17">Illinois</option>
+	<option value="18">Indiana</option>
+	<option value="19">Iowa</option>
+	<option value="20">Kansas</option>
+	<option value="21">Kentucky</option>
+	<option value="22">Louisiana</option>
+	<option value="23">Maine</option>
+	<option value="24">Maryland</option>
+	<option value="25">Massachusetts</option>
+	<option value="26">Michigan</option>
+	<option value="27">Minnesota</option>
+	<option value="28">Mississippi</option>
+	<option value="29">Missouri</option>
+	<option value="30">Montana</option>
+	<option value="31">Nebraska</option>
+	<option value="32">Nevada</option>
+	<option value="33">New Hampshire</option>
+	<option value="34">New Jersey</option>
+	<option value="35">New Mexico</option>
+	<option value="36">New York</option>
+	<option value="37">North Carolina</option>
+	<option value="38">North Dakota</option>
+	<option value="39">Ohio</option>
+	<option value="40">Oklahoma</option>
+	<option value="41">Oregon</option>
+	<option value="42">Pennsylvania</option>
+	<option value="44">Rhode Island</option>
+	<option value="45">South Carolina</option>
+	<option value="46">South Dakota</option>
+	<option value="47">Tennessee</option>
+	<option value="48">Texas</option>
+	<option value="49">Utah</option>
+	<option value="50">Vermont</option>
+	<option value="51">Virginia</option>
+	<option value="53">Washington</option>
+	<option value="54">West Virginia</option>
+	<option value="55">Wisconsin</option>
+	<option value="56">Wyoming</option>
+    <option value="101">Australia</option>
+    <option value="102">Brazil</option>
+    <option value="103">Japan</option>
+    <option value="104">India</option>
+    <option value="105">Zimbambwe</option>
+</select> 
+     <br></br>
+<select id="event">
+    <option value="0">Select Event</option>
+    <option value="12">Elections in India</option>
+    <option value="14">Elections in India 2014</option>
+    <option value="23">Farmer Year Australia 2012</option>
+    <option value="65">World War II Japan 1945</option>
+    <option value="17">9/11 Disaster United States 2001</option>
+    <option value="27">Wiki Leaks Diamonds of Zimbabwe 2008</option>
+    <option value="6">Rio Olympics Brazil 2016</option>
+    <option value="11">North American Winter Storm 2014</option>
+    <option value="18">Obama Care 2010</option>
+    <option value="11">Candy Crush Saga 2013</option>
+    <option value="20">Economic Obsession US 2011</option>
+     </select>
+    </div>
+</div>
+<div id="part2" class="col span_1_of_3">
+ <div id="area21" style="width: 100%; height: 40vh;"></div>
+ <div id="area22" style="width: 100%; height: 46vh; padding-top: 4vh"></div>
+ <div id="ctrl2" style="width: 100%; height: 2vh;padding-top:0;">
+<input type="checkbox" id="opt2" style="font-size:20px"> Ages Grouped<br>
+<select id="year2">
+    <option value="0">Population 2010</option>
+    <option value="1">Population 2011</option>
+    <option value="2">Population 2012</option>
+    <option value="3">Population 2013</option> 
+    <option value="4">Population 2014</option>
+</select>
+<select id="state2">
+    <option value="0">United States</option>
+	<option value="1">Alabama</option>
+	<option value="2">Alaska</option>
+	<option value="3">Arizona</option>
+	<option value="5">Arkansas</option>
+	<option value="6">California</option>
+	<option value="8">Colorado</option>
+	<option value="9">Connecticut</option>
+	<option value="10">Delaware</option>
+	<option value="11">District of Columbia</option>
+	<option value="12">Florida</option>
+	<option value="13">Georgia</option>
+	<option value="15">Hawaii</option>
+	<option value="16">Idaho</option>
+	<option value="17">Illinois</option>
+	<option value="18">Indiana</option>
+	<option value="19">Iowa</option>
+	<option value="20">Kansas</option>
+	<option value="21">Kentucky</option>
+	<option value="22">Louisiana</option>
+	<option value="23">Maine</option>
+	<option value="24">Maryland</option>
+	<option value="25">Massachusetts</option>
+	<option value="26">Michigan</option>
+	<option value="27">Minnesota</option>
+	<option value="28">Mississippi</option>
+	<option value="29">Missouri</option>
+	<option value="30">Montana</option>
+	<option value="31">Nebraska</option>
+	<option value="32">Nevada</option>
+	<option value="33">New Hampshire</option>
+	<option value="34">New Jersey</option>
+	<option value="35">New Mexico</option>
+	<option value="36">New York</option>
+	<option value="37">North Carolina</option>
+	<option value="38">North Dakota</option>
+	<option value="39">Ohio</option>
+	<option value="40">Oklahoma</option>
+	<option value="41">Oregon</option>
+	<option value="42">Pennsylvania</option>
+	<option value="44">Rhode Island</option>
+	<option value="45">South Carolina</option>
+	<option value="46">South Dakota</option>
+	<option value="47">Tennessee</option>
+	<option value="48">Texas</option>
+	<option value="49">Utah</option>
+	<option value="50">Vermont</option>
+	<option value="51">Virginia</option>
+	<option value="53">Washington</option>
+	<option value="54">West Virginia</option>
+	<option value="55">Wisconsin</option>
+	<option value="56">Wyoming</option>
+    <option value="101">Australia</option>
+    <option value="102">Brazil</option>
+    <option value="103">Japan</option>
+    <option value="104">India</option>
+    <option value="105">Zimbambwe</option>
+</select> 
+     <br></br>
+<select id="event2">
+    <option value="0">Select Event</option>
+    <option value="12">Elections in India</option>
+    <option value="14">Elections in India 2014</option>
+    <option value="23">Farmer Year Australia 2012</option>
+    <option value="65">World War II Japan 1945</option>
+    <option value="17">9/11 Disaster United States 2001</option>
+    <option value="27">Wiki Leaks Diamonds of Zimbabwe 2008</option>
+    <option value="6">Rio Olympics Brazil 2016</option>
+    <option value="11">North American Winter Storm 2014</option>
+    <option value="18">Obama Care 2010</option>
+    <option value="11">Candy Crush Saga 2013</option>
+    <option value="20">Economic Obsession US 2011</option>
+     </select>
+    </div></div>
+<div id="part3" class="col span_1_of_3">
+ <div id="area31" style="width: 100%; height: 40vh;"></div>
+ <div id="area32" style="width: 100%; height: 46vh;padding-top: 4vh"></div>
+<div id="ctrl3" style="width: 100%; height: 2vh;padding-top:0;">
+    <input type="checkbox" id="opt3" style="font-size:20px"> Ages Grouped<br>
+<select id="year3">
+    <option value="0">Population 2010</option>
+    <option value="1">Population 2011</option>
+    <option value="2">Population 2012</option>
+    <option value="3">Population 2013</option> 
+    <option value="4">Population 2014</option>
+</select>
+<select id="state3">
+    <option value="0">United States</option>
+	<option value="1">Alabama</option>
+	<option value="2">Alaska</option>
+	<option value="3">Arizona</option>
+	<option value="5">Arkansas</option>
+	<option value="6">California</option>
+	<option value="8">Colorado</option>
+	<option value="9">Connecticut</option>
+	<option value="10">Delaware</option>
+	<option value="11">District of Columbia</option>
+	<option value="12">Florida</option>
+	<option value="13">Georgia</option>
+	<option value="15">Hawaii</option>
+	<option value="16">Idaho</option>
+	<option value="17">Illinois</option>
+	<option value="18">Indiana</option>
+	<option value="19">Iowa</option>
+	<option value="20">Kansas</option>
+	<option value="21">Kentucky</option>
+	<option value="22">Louisiana</option>
+	<option value="23">Maine</option>
+	<option value="24">Maryland</option>
+	<option value="25">Massachusetts</option>
+	<option value="26">Michigan</option>
+	<option value="27">Minnesota</option>
+	<option value="28">Mississippi</option>
+	<option value="29">Missouri</option>
+	<option value="30">Montana</option>
+	<option value="31">Nebraska</option>
+	<option value="32">Nevada</option>
+	<option value="33">New Hampshire</option>
+	<option value="34">New Jersey</option>
+	<option value="35">New Mexico</option>
+	<option value="36">New York</option>
+	<option value="37">North Carolina</option>
+	<option value="38">North Dakota</option>
+	<option value="39">Ohio</option>
+	<option value="40">Oklahoma</option>
+	<option value="41">Oregon</option>
+	<option value="42">Pennsylvania</option>
+	<option value="44">Rhode Island</option>
+	<option value="45">South Carolina</option>
+	<option value="46">South Dakota</option>
+	<option value="47">Tennessee</option>
+	<option value="48">Texas</option>
+	<option value="49">Utah</option>
+	<option value="50">Vermont</option>
+	<option value="51">Virginia</option>
+	<option value="53">Washington</option>
+	<option value="54">West Virginia</option>
+	<option value="55">Wisconsin</option>
+	<option value="56">Wyoming</option>
+    <option value="101">Australia</option>
+    <option value="102">Brazil</option>
+    <option value="103">Japan</option>
+    <option value="104">India</option>
+    <option value="105">Zimbambwe</option>
+</select>  
+    <br></br>
+<select id="event3">
+    <option value="0">Select Event</option>
+    <option value="14">Elections in India 2014</option>
+    <option value="23">Farmer Year Australia 2012</option>
+    <option value="65">World War II Japan 1945</option>
+    <option value="17">9/11 Disaster United States 2001</option>
+    <option value="27">Wiki Leaks Diamonds of Zimbabwe 2008</option>
+    <option value="6">Rio Olympics Brazil 2016</option>
+    <option value="11">North American Winter Storm 2014</option>
+    <option value="18">Obama Care 2010</option>
+    <option value="11">Candy Crush Saga 2013</option>
+    <option value="20">Economic Obsession US 2011</option>
+     </select>
+    </div>
+</div>
+<body>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.5/d3.min.js"></script>
+<script>
+    d3.csv("data.csv",function(error, data) {
+    data.forEach(function(d) {
+    d.state = +d.state
+    d.pop10 = +d.pop10;
+    d.pop11 = +d.pop11;
+    d.pop12 = +d.pop12;
+    d.pop13 = +d.pop13;
+    d.pop14 = +d.pop14;
+    d.age = +d.age;
+    d.property = +d.property;
+  });
+function upd1(st,flag,py,ev)
+{    
+    var margin = {top: 40, right: 20, bottom: 30, left: 40};
+   // width = 2500 - margin.left - margin.right,
+    //var curwid=document.getElementById("area1");
+    var width=$('#area1').width();
+    console.log(width);
+    // var height = 900 - margin.top - margin.bottom;
+    var height=$('#area1').height();
+    console.log(height);
+    
+var x = d3.scale.ordinal()
+    .rangeRoundBands([0, width], 0.2);
+
+var y = d3.scale.linear()
+    .range([height, 0]);
+
+var yAxis = d3.svg.axis()
+    .scale(y)
+    .ticks(6)
+    .orient("right")
+    .tickSize(width)
+    .tickFormat(d3.format("s"));
+   
+var svg = d3.select("#area1").append("svg")
+    .attr("width", width + margin.left + margin.right)
+    .attr("height", height + margin.top + margin.bottom)
+   .append("g")
+    .attr("transform", "translate(" + margin.left + "," + margin.top + ")");   
+    
+  var usnest =data.filter(function(wholeus){ return wholeus.state == st;});
+  console.log(usnest);
+    usnest.forEach(function(d){
+    if(py=="1"){    
+    d.pop10=d.pop11;
+    }
+    else if(py=="2")
+    {
+     d.pop10=d.pop12;
+    }
+    else if(py=="3")
+    {
+        d.pop10=d.pop13;
+    }
+    else if(py=="4")
+    {
+        d.pop10=d.pop14;
+    }
+    else
+    {
+        d.pop10=d.pop10;
+    }
+    });
+    console.log(usnest);
+  if(flag == 1)
+  {
+  var usnest=d3.nest()
+     .key(function(d){return d.property;}).rollup(function(hmm){return { gpop: d3.sum(hmm,function(d){ return parseInt(d.pop10);})}}).entries(usnest);
+  usnest.forEach(function(d){
+      d.age= +d.key;
+      d.pop10= +d.values.gpop;
+  });
+    //console.log(usnest);
+  }
+  console.log(usnest);    
+         if (error) throw error;
+  x.domain(usnest.map(function(d) { return d.age; }));
+  y.domain([0, d3.max(usnest, function(d) { return d.pop10*1.3; })]);
+  var xAxis = d3.svg.axis()
+    .scale(x)
+    .orient("bottom");
+    
+    svg.append("g")
+      .attr("class", "x axis")
+      .attr("transform", "translate(0," + height + ")")
+      .call(xAxis);
+  var k2 = svg.selectAll(".bar")
+      .data(usnest)
+    .enter().append("rect")
+      .attr("class", "bar")
+      .attr("x", function(d) { return x(d.age); })
+      .attr("width", x.rangeBand())
+      .attr("y", function(d) { return y(d.pop10); })
+      .attr("height", function(d) { return height - y(d.pop10); });
+    
+   
+    d3.selectAll("g")
+      .attr("font-size",function(d) { return Math.min(height,width)/20 + "px"; });
+    
+  var gy = svg.append("g")
+    .attr("class", "y axis")
+    .call(yAxis);
+  gy.selectAll("g").filter(function(d) { return d; })
+    .classed("minor", true);
+  gy.selectAll("text")
+    .attr("x", -25)
+    .attr("dy", 4)
+    .attr("font-size",function(d) { return Math.min(height,width)/20 + "px"; });
+    
+var width2 = $('#area2').width(),
+    height2 = $('#area2').height(),
+   radius = Math.min(width2,height2) / 2 - 30;
+var color = d3.scale.category20c();
+var arc = d3.svg.arc()
+    .outerRadius(radius)
+    .innerRadius(0);
+
+var pie = d3.layout.pie()
+    .sort(null)
+   .value(function(d) { return d.pop10; });
+
+var svg2 = d3.select("#area2").append("svg")
+    .attr("width", width2)
+    .attr("height", height2)
+  .append("g")
+    .attr("transform", "translate(" + width2/2  + "," + (height2/2 + 30) + ")"); 
+    
+ var g2= svg2.selectAll(".arc")
+      .data(pie(usnest))
+    .enter().append("g")
+      .attr("class", "arc");
+    g2.append("path")
+      .attr("d", arc)
+      .style("fill", function(d) { return color(d.data.age); });
+  g2.append("text")
+      .attr("transform", function(d) { return "translate(" + arc.centroid(d) + ")";})
+      .attr("dy", ".35em")
+      .attr("font-size",function(d) { return Math.min(height2,width2)/20 + "px"; })
+      .style("text-anchor", "middle")
+      .text(function(d) { return d.data.age; });
+if(ev=="0")
+{
+    ;
+}
+else
+{
+     g2.append("path").attr("d",arc).style("fill",function(d){
+    if(d.data.age>=ev){return "orange";}
+          else { return "steelblue";} })
+     d3.select('#area1').selectAll(".bar")
+       .filter(function(d) { return d.age > ev; })
+       .style("fill", "orange");
+ }
+}
+upd1("0",0,0,"0");
+d3.select('#state')
+  .on('change', function() {
+  var s1 = eval(d3.select(this).property('value'));
+  d3.select("#area1").selectAll('*').remove();
+  d3.select("#area2").selectAll('*').remove();
+  var tr=d3.select('#opt1').property('checked');
+      var gr=0;
+      if(tr==true)
+      {
+       gr=1;
+      }
+  var py1= eval(d3.select('#year').property('value'));  
+  var ev1= eval(d3.select('#event').property('value'));
+  upd1(s1,gr,py1,ev1);
+});
+d3.select('#opt1')
+  .on('change', function(){
+      var gr=0;
+      var tr=d3.select(this).property('checked');
+       console.log(tr);
+      if(tr==true)
+      {
+       gr=1;
+      }
+      console.log(gr);
+    var s2 = eval(d3.select('#state').property('value'));
+      d3.select("#area1").selectAll('*').remove();
+    var py1= eval(d3.select('#year').property('value'));
+    var ev1= eval(d3.select('#event').property('value'));
+  d3.select("#area2").selectAll('*').remove();
+  upd1(s2,gr,py1,ev1);
+  });
+ d3.select('#year').on('change',function() {
+  var s1 = eval(d3.select('#state').property('value'));
+  var tr=d3.select('#opt1').property('checked');
+      var gr=0;
+      if(tr==true)
+      {
+       gr=1;
+      }
+  var py1= eval(d3.select('#year').property('value'));  
+  var ev1= eval(d3.select('#event').property('value'));
+  d3.select("#area1").selectAll('*').remove();
+  d3.select("#area2").selectAll('*').remove();
+  upd1(s1,gr,py1,ev1);   
+ });
+d3.select('#event').on('change',function() {
+  var s1 = eval(d3.select('#state').property('value'));
+  var tr=d3.select('#opt1').property('checked');
+      var gr=0;
+      if(tr==true)
+      {
+       gr=1;
+      }
+  var ev1= eval(d3.select('#event').property('value'));
+  var py1= eval(d3.select('#year').property('value'));        
+  d3.select("#area1").selectAll('*').remove();
+  d3.select("#area2").selectAll('*').remove();
+  upd1(s1,gr,py1,ev1);   
+ });
+        
+        
+//second div of screen
+        
+        
+function upd2(st,flag,py,ev)
+{    
+    //
+    
+    var margin = {top: 40, right: 20, bottom: 30, left: 40};
+   // width = 2500 - margin.left - margin.right,
+    var width=$('#area21').width();
+    console.log(width);
+    // var height = 900 - margin.top - margin.bottom;
+    var height=$('#area21').height();
+    console.log(height);
+    
+var x = d3.scale.ordinal()
+    .rangeRoundBands([0, width], 0.2);
+
+var y = d3.scale.linear()
+    .range([height, 0]);
+
+var yAxis = d3.svg.axis()
+    .scale(y)
+    .ticks(6)
+    .orient("right")
+    .tickSize(width)
+    .tickFormat(d3.format("s"));
+   
+var svg = d3.select("#area21").append("svg")
+    .attr("width", width + margin.left + margin.right)
+    .attr("height", height + margin.top + margin.bottom)
+   .append("g")
+    .attr("transform", "translate(" + margin.left + "," + margin.top + ")");   
+    
+var width2 = $('#area22').width(),
+    height2 = $('#area22').height(),
+    //radius =$('#area22').height()/2;
+   radius = Math.min(width2,height2)/2 -30;
+   
+var color = d3.scale.category20c();
+
+var arc = d3.svg.arc()
+    .outerRadius(radius)
+    .innerRadius(0);
+
+var pie = d3.layout.pie()
+    .sort(null)
+   .value(function(d) { return d.pop10; });
+
+var svg2 = d3.select("#area22").append("svg")
+    .attr("width", width2)
+    .attr("height", height2)
+  .append("g")
+    .attr("transform", "translate(" + width2/2 + "," + (height2/2+30) + ")");
+// 
+  var usnest =data.filter(function(wholeus){ return wholeus.state == st;});
+  console.log(usnest);
+    usnest.forEach(function(d){
+    if(py=="1"){    
+    d.pop10=d.pop11;
+    }
+    else if(py=="2")
+    {
+     d.pop10=d.pop12;
+    }
+    else if(py=="3")
+    {
+        d.pop10=d.pop13;
+    }
+    else if(py=="4")
+    {
+        d.pop10=d.pop14;
+    }
+    else
+    {
+        d.pop10=d.pop10;
+    }
+    });
+    console.log(usnest);
+  if(flag == 1)
+  {
+  var usnest=d3.nest()
+     .key(function(d){return d.property;}).rollup(function(hmm){return { gpop: d3.sum(hmm,function(d){ return parseInt(d.pop10);})}}).entries(usnest);
+  usnest.forEach(function(d){
+      d.age= +d.key;
+      d.pop10= +d.values.gpop;
+  });
+    //console.log(usnest);
+  }
+  console.log(usnest);    
+         if (error) throw error;
+  x.domain(usnest.map(function(d) { return d.age; }));
+  y.domain([0, d3.max(usnest, function(d) { return d.pop10*1.3; })]);
+  var xAxis = d3.svg.axis()
+    .scale(x)
+    .orient("bottom");
+    
+    svg.append("g")
+      .attr("class", "x axis")
+      .attr("transform", "translate(0," + height + ")")
+      .call(xAxis);
+  var k2 = svg.selectAll(".bar")
+      .data(usnest)
+    .enter().append("rect")
+      .attr("class", "bar")
+      .attr("x", function(d) { return x(d.age); })
+      .attr("width", x.rangeBand())
+      .attr("y", function(d) { return y(d.pop10); })
+      .attr("height", function(d) { return height - y(d.pop10); });
+   
+    d3.selectAll("g")
+      .attr("font-size", function(d) { return Math.min(height,width)/20 + "px"; });
+    
+  var gy = svg.append("g")
+    .attr("class", "y axis")
+    .call(yAxis);
+  gy.selectAll("g").filter(function(d) { return d; })
+    .classed("minor", true);
+  gy.selectAll("text")
+    .attr("x", -25)
+    .attr("dy", 4)
+    .attr("font-size",function(d) { return Math.min(height,width)/20 + "px"; });
+    
+ var g2= svg2.selectAll(".arc")
+      .data(pie(usnest))
+    .enter().append("g")
+      .attr("class", "arc");
+
+    g2.append("path")
+      .attr("d", arc)
+      .style("fill", function(d) { return color(d.data.age); });
+  g2.append("text")
+      .attr("transform", function(d) { return "translate(" + arc.centroid(d) + ")"; })
+      .attr("dy", ".35em")
+      .attr("font-size",function(d) { return Math.min(height2,width2)/20 + "px"; })
+      .style("text-anchor", "middle")
+      .text(function(d) { return d.data.age; }); 
+    
+ if(ev=="0")
+{
+    ;
+}
+else
+{
+     g2.append("path").attr("d",arc).style("fill",function(d){
+    if(d.data.age>ev){return "orange";}
+          else { return "steelblue";} })
+     d3.select('#area21').selectAll(".bar")
+       .filter(function(d) { return d.age > ev; })
+       .style("fill", "orange");
+ }          
+}
+d3.select('#state2')
+  .on('change', function() {
+  var s1 = eval(d3.select(this).property('value'));
+  var tr=d3.select('#opt2').property('checked');
+      var gr=0;
+      if(tr==true)
+      {
+       gr=1;
+      }
+  var py1= eval(d3.select('#year2').property('value'));
+    var ev1= eval(d3.select('#event2').property('value'));
+  d3.select("#area21").selectAll('*').remove();
+  d3.select("#area22").selectAll('*').remove();
+  upd2(s1,gr,py1,ev1);    
+});
+d3.select('#opt2')
+  .on('change', function(){
+      var gr=0;
+      var tr=d3.select(this).property('checked');
+       console.log(tr);
+      if(tr==true)
+      {
+       gr=1;
+      }
+      console.log(gr);
+    var s2 = eval(d3.select('#state2').property('value'));
+      d3.select("#area21").selectAll('*').remove();
+    var py1= eval(d3.select('#year2').property('value'));
+    var ev1= eval(d3.select('#event2').property('value'));
+  d3.select("#area22").selectAll('*').remove();
+  upd2(s2,gr,py1,ev1);
+  });
+ d3.select('#year2').on('change',function() {
+  var s1 = eval(d3.select('#state2').property('value'));
+  var tr=d3.select('#opt2').property('checked');
+      var gr=0;
+      if(tr==true)
+      {
+       gr=1;
+      }
+  var ev1= eval(d3.select('#event2').property('value'));
+  var py1= eval(d3.select('#year2').property('value'));        
+  d3.select("#area21").selectAll('*').remove();
+  d3.select("#area22").selectAll('*').remove();
+  upd2(s1,gr,py1,ev1);   
+ });     
+d3.select('#event2').on('change',function() {
+  var s1 = eval(d3.select('#state2').property('value'));
+  var tr=d3.select('#opt2').property('checked');
+      var gr=0;
+      if(tr==true)
+      {
+       gr=1;
+      }
+  var ev1= eval(d3.select('#event2').property('value'));
+  var py1= eval(d3.select('#year2').property('value'));        
+  d3.select("#area21").selectAll('*').remove();
+  d3.select("#area22").selectAll('*').remove();
+  upd2(s1,gr,py1,ev1);   
+ });    
+        
+        
+//div3 of screen
+        
+        
+function upd3(st,flag,py,ev)
+{    
+    var margin = {top: 40, right: 20, bottom: 30, left: 40};
+   // width = 2500 - margin.left - margin.right,
+    var width=$('#area31').width();
+    console.log(width);
+    // var height = 900 - margin.top - margin.bottom;
+    var height=$('#area31').height();
+    console.log(height);
+    
+var x = d3.scale.ordinal()
+    .rangeRoundBands([0, width], 0.2);
+
+var y = d3.scale.linear()
+    .range([height, 0]);
+
+var yAxis = d3.svg.axis()
+    .scale(y)
+    .ticks(6)
+    .orient("right")
+    .tickSize(width)
+    .tickFormat(d3.format("s"));
+   
+var svg = d3.select("#area31").append("svg")
+    .attr("width", width + margin.left + margin.right)
+    .attr("height", height + margin.top + margin.bottom)
+   .append("g")
+    .attr("transform", "translate(" + margin.left + "," + margin.top + ")");   
+    
+var width2 = $('#area32').width(),
+    height2 = $('#area32').height(),
+   radius = Math.min(height2,width2) / 2 -30;
+   
+var color = d3.scale.category20c();
+
+var arc = d3.svg.arc()
+    .outerRadius(radius)
+    .innerRadius(0);
+
+var pie = d3.layout.pie()
+    .sort(null)
+   .value(function(d) { return d.pop10; });
+
+var svg2 = d3.select("#area32").append("svg")
+    .attr("width", width2)
+    .attr("height", height2)
+  .append("g")
+    .attr("transform", "translate(" + width2/2 + "," + (height2/2 +30) + ")");
+    
+  var usnest =data.filter(function(wholeus){ return wholeus.state == st;});
+  //console.log(usnest);
+    usnest.forEach(function(d){
+    if(py=="1"){    
+    d.pop10=d.pop11;
+    }
+    else if(py=="2")
+    {
+     d.pop10=d.pop12;
+    }
+    else if(py=="3")
+    {
+        d.pop10=d.pop13;
+    }
+    else if(py=="4")
+    {
+        d.pop10=d.pop14;
+    }
+    else
+    {
+        d.pop10=d.pop10;
+    }
+    });
+    console.log(usnest);
+  if(flag == 1)
+  {
+  var usnest=d3.nest()
+     .key(function(d){return d.property;}).rollup(function(hmm){return { gpop:              d3.sum(hmm,function(d){ return parseInt(d.pop10);})}}).entries(usnest);
+   usnest.forEach(function(d){
+      d.age= +d.key;
+      d.pop10= +d.values.gpop;
+  });
+    //console.log(usnest);
+  }
+  console.log(usnest);    
+  if (error) throw error;
+  x.domain(usnest.map(function(d) { return d.age; }));
+  y.domain([0, d3.max(usnest, function(d) { return d.pop10*1.3; })]);
+  var xAxis = d3.svg.axis()
+    .scale(x)
+    .orient("bottom");
+    
+    svg.append("g")
+      .attr("class", "x axis")
+      .attr("transform", "translate(0," + height + ")")
+      .call(xAxis);
+  var k2 = svg.selectAll(".bar")
+      .data(usnest)
+    .enter().append("rect")
+      .attr("class", "bar")
+      .attr("x", function(d) { return x(d.age); })
+      .attr("width", x.rangeBand())
+      .attr("y", function(d) { return y(d.pop10); })
+      .attr("height", function(d) { return height - y(d.pop10); });
+   
+    d3.selectAll("g")
+      .attr("font-size",function(d) { return Math.min(height,width)/20 + "px"; } );
+    
+  var gy = svg.append("g")
+    .attr("class", "y axis")
+    .call(yAxis);
+  gy.selectAll("g").filter(function(d) { return d; })
+    .classed("minor", true);
+  gy.selectAll("text")
+    .attr("x", -25)
+    .attr("dy", 4)
+    .attr("font-size",function(d) { return Math.min(height,width)/20 + "px"; });
+    var g2= svg2.selectAll(".arc")
+      .data(pie(usnest))
+    .enter().append("g")
+      .attr("class", "arc");
+
+    g2.append("path")
+      .attr("d", arc)
+      .style("fill", function(d) { return color(d.data.age); });
+  g2.append("text")
+      .attr("transform", function(d) { return "translate(" + arc.centroid(d) + ")"; })
+      .attr("dy", ".35em")
+      .attr("font-size",function(d) { return Math.min(height2,width2)/20 + "px"; })
+      .style("text-anchor", "middle")
+      .text(function(d) { return d.data.age; }); 
+    
+    
+    
+if(ev=="0")
+{
+    ;
+}
+else
+{
+     g2.append("path").attr("d",arc).style("fill",function(d){
+    if(d.data.age>=ev){return "orange";}
+          else { return "steelblue";} })
+     d3.select('#area31').selectAll(".bar")
+       .filter(function(d) { return d.age > ev; })
+       .style("fill", "orange");
+ }
+           
+}
+d3.select('#state3')
+  .on('change', function() {
+  var s1 = eval(d3.select(this).property('value'));
+  d3.select("#area31").selectAll('*').remove();
+  d3.select("#area32").selectAll('*').remove();
+  var tr=d3.select('#opt3').property('checked');
+      var gr=0;
+      if(tr==true)
+      {
+       gr=1;
+      }
+  var ev1= eval(d3.select('#event3').property('value'));
+  var py1= eval(d3.select('#year3').property('value'));  
+  upd3(s1,gr,py1,ev1);
+});
+d3.select('#opt3')
+  .on('change', function(){
+      var gr=0;
+      var tr=d3.select(this).property('checked');
+       console.log(tr);
+      if(tr==true)
+      {
+       gr=1;
+      }
+      console.log(gr);
+    var s2 = eval(d3.select('#state3').property('value'));
+      d3.select("#area31").selectAll('*').remove();
+    var py1= eval(d3.select('#year3').property('value'));
+  d3.select("#area32").selectAll('*').remove();
+    var ev1= eval(d3.select('#event3').property('value'));
+  upd3(s2,gr,py1,ev1);
+  });
+ d3.select('#year3').on('change',function() {
+  var s1 = eval(d3.select('#state3').property('value'));
+  var tr=d3.select('#opt3').property('checked');
+      var gr=0;
+      if(tr==true)
+      {
+       gr=1;
+      }
+  var ev1= eval(d3.select('#event3').property('value'));
+  var py1= eval(d3.select('#year3').property('value'));        
+  d3.select("#area31").selectAll('*').remove();
+  d3.select("#area32").selectAll('*').remove();
+  upd3(s1,gr,py1,ev1);   
+ });  
+d3.select('#event3').on('change',function() {
+  var s1 = eval(d3.select('#state3').property('value'));
+  var tr=d3.select('#opt3').property('checked');
+      var gr=0;
+      if(tr==true)
+      {
+       gr=1;
+      }
+  var ev1= eval(d3.select('#event3').property('value'));
+  var py1= eval(d3.select('#year3').property('value'));        
+  d3.select("#area31").selectAll('*').remove();
+  d3.select("#area32").selectAll('*').remove();
+  upd3(s1,gr,py1,ev1);   
+ });
+        
+    });
+    </script>
+    
+</body>

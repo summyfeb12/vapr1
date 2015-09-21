@@ -2,7 +2,6 @@
 <meta charset="utf-8">
 <head><script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script></head>
 <style>
-
 .bar {
   fill: steelblue;
 }
@@ -55,21 +54,21 @@
 	.span_3_of_3, .span_2_of_3, .span_1_of_3 { width: 100%; }
 }
 </style>
-<div id="header" style="width: 100%; height: 1vh;font-size: 20px; text-align: center;">Population and Events</div>
+<div id="header" style="width: 100%; height: 1vh;font-size: 5vh; text-align: center;">Population and Events</div>
 <div id="container" class="section group">
 <div id="part1" class="col span_1_of_3">
- <div id="area1" style="width: 100%; height: 40vh;padding-top: 0vh"></div>
- <div id="area2" style="width: 100%; height: 46vh; padding-top: 4vh;"></div>
+ <div id="area1" style="width: 100%; height: 40vh;padding-bottom: 0"></div>
+ <div id="area2" style="width: 100%; height: 45vh; padding-top: 2vh;"></div>
  <div id="ctrl1" style="width: 100%; height: 2vh;padding-top:0;">
 <input type="checkbox" id="opt1" style="font-size:20px"> Ages Grouped<br>
-<select id="year">
+<select type="lists" id="year">
     <option value="0">Population 2010</option>
     <option value="1">Population 2011</option>
     <option value="2">Population 2012</option>
     <option value="3">Population 2013</option> 
     <option value="4">Population 2014</option>
 </select>
-<select id="state">
+<select type="lists" id="state">
     <option value="0">United States</option>
 	<option value="1">Alabama</option>
 	<option value="2">Alaska</option>
@@ -129,7 +128,7 @@
     <option value="105">Zimbambwe</option>
 </select> 
      <br></br>
-<select id="event">
+<select type="lists" id="event">
     <option value="0">Select Event</option>
     <option value="12">Elections in India</option>
     <option value="14">Elections in India 2014</option>
@@ -147,7 +146,7 @@
 </div>
 <div id="part2" class="col span_1_of_3">
  <div id="area21" style="width: 100%; height: 40vh;"></div>
- <div id="area22" style="width: 100%; height: 46vh; padding-top: 4vh"></div>
+ <div id="area22" style="width: 100%; height: 45vh; padding-top: 2vh"></div>
  <div id="ctrl2" style="width: 100%; height: 2vh;padding-top:0;">
 <input type="checkbox" id="opt2" style="font-size:20px"> Ages Grouped<br>
 <select id="year2">
@@ -234,7 +233,7 @@
     </div></div>
 <div id="part3" class="col span_1_of_3">
  <div id="area31" style="width: 100%; height: 40vh;"></div>
- <div id="area32" style="width: 100%; height: 46vh;padding-top: 4vh"></div>
+ <div id="area32" style="width: 100%; height: 45vh;padding-top: 2vh"></div>
 <div id="ctrl3" style="width: 100%; height: 2vh;padding-top:0;">
     <input type="checkbox" id="opt3" style="font-size:20px"> Ages Grouped<br>
 <select id="year3">
@@ -335,13 +334,13 @@
   });
 function upd1(st,flag,py,ev)
 {    
-    var margin = {top: 40, right: 20, bottom: 30, left: 40};
+    var margin = {top: 40, right: 20, bottom: 40, left: 40};
    // width = 2500 - margin.left - margin.right,
     //var curwid=document.getElementById("area1");
-    var width=$('#area1').width();
+    var width=$('#area1').width()- margin.left - margin.right;
     console.log(width);
     // var height = 900 - margin.top - margin.bottom;
-    var height=$('#area1').height();
+    var height=$('#area1').height()- margin.top - margin.bottom;
     console.log(height);
     
 var x = d3.scale.ordinal()
@@ -428,7 +427,7 @@ var svg = d3.select("#area1").append("svg")
   gy.selectAll("g").filter(function(d) { return d; })
     .classed("minor", true);
   gy.selectAll("text")
-    .attr("x", -25)
+    .attr("x", -23)
     .attr("dy", 4)
     .attr("font-size",function(d) { return Math.min(height,width)/20 + "px"; });
     
@@ -547,12 +546,12 @@ function upd2(st,flag,py,ev)
 {    
     //
     
-    var margin = {top: 40, right: 20, bottom: 30, left: 40};
+    var margin = {top: 40, right: 20, bottom: 40, left: 40};
    // width = 2500 - margin.left - margin.right,
-    var width=$('#area21').width();
+    var width=$('#area21').width()- margin.left - margin.right;
     console.log(width);
     // var height = 900 - margin.top - margin.bottom;
-    var height=$('#area21').height();
+    var height=$('#area21').height()- margin.top - margin.bottom;
     console.log(height);
     
 var x = d3.scale.ordinal()
@@ -659,7 +658,7 @@ var svg2 = d3.select("#area22").append("svg")
   gy.selectAll("g").filter(function(d) { return d; })
     .classed("minor", true);
   gy.selectAll("text")
-    .attr("x", -25)
+    .attr("x", -23)
     .attr("dy", 4)
     .attr("font-size",function(d) { return Math.min(height,width)/20 + "px"; });
     
@@ -759,12 +758,12 @@ d3.select('#event2').on('change',function() {
         
 function upd3(st,flag,py,ev)
 {    
-    var margin = {top: 40, right: 20, bottom: 30, left: 40};
+    var margin = {top: 40, right: 20, bottom: 40, left: 40};
    // width = 2500 - margin.left - margin.right,
-    var width=$('#area31').width();
+    var width=$('#area31').width()- margin.left - margin.right;
     console.log(width);
     // var height = 900 - margin.top - margin.bottom;
-    var height=$('#area31').height();
+    var height=$('#area31').height()- margin.top - margin.bottom;
     console.log(height);
     
 var x = d3.scale.ordinal()
@@ -870,7 +869,7 @@ var svg2 = d3.select("#area32").append("svg")
   gy.selectAll("g").filter(function(d) { return d; })
     .classed("minor", true);
   gy.selectAll("text")
-    .attr("x", -25)
+    .attr("x", -23)
     .attr("dy", 4)
     .attr("font-size",function(d) { return Math.min(height,width)/20 + "px"; });
     var g2= svg2.selectAll(".arc")

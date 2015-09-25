@@ -61,15 +61,15 @@
  <div id="area1" style="width: 100%; height: 40vh;padding-bottom: 0"></div>
  <div id="area2" style="width: 100%; height: 45vh; padding-top: 2vh;"></div>
  <div id="ctrl1" style="width: 100%; height: 2vh;padding-top:0;">     
-<input type="checkbox" id="opt1" style="font-size:20px"> Ages Grouped<br>
-<select type="lists" id="year">
+<input type="checkbox" id="opt1" style="width: 2vh; height: 2vh;"><span style="font-size: 2.5vh;">Ages Grouped</span><br>
+<select type="lists" id="year" style="height: 5vh; width: 40%;font-size: 2vh;">
     <option value="0">Population 2010</option>
     <option value="1">Population 2011</option>
     <option value="2">Population 2012</option>
     <option value="3">Population 2013</option> 
     <option value="4">Population 2014</option>
 </select>
-<select type="lists" id="state">
+<select type="lists" id="state" style="height: 5vh; width: 40%;font-size: 2vh;">
     <option value="0">United States</option>
 	<option value="1">Alabama</option>
 	<option value="2">Alaska</option>
@@ -128,8 +128,8 @@
     <option value="104">India</option>
     <option value="105">Zimbambwe</option>
 </select> 
-<p align="left" style="font-size: 20px;">Event Related Population In<span style="color: #FFA500"> Orange</span></p>
-<select type="lists" id="event">
+<p align="left" style="font-size: 2vh;">Event Related Population In<span style="color: #FFA500"> Orange</span></p>
+<select type="lists" id="event" style="height: 5vh; width: 40%;font-size: 2vh;">
     <option value="0">Select Event</option>
     <option value="14">Elections in India 2014</option>
     <option value="23">Farmer Year Australia 2012</option>
@@ -148,15 +148,15 @@
  <div id="area21" style="width: 100%; height: 40vh;"></div>
  <div id="area22" style="width: 100%; height: 45vh; padding-top: 2vh"></div>
  <div id="ctrl2" style="width: 100%; height: 2vh;padding-top:0;">
-<input type="checkbox" id="opt2" style="font-size:20px"> Ages Grouped<br>
-<select id="year2">
+     <input type="checkbox" id="opt2" style="width: 2vh; height: 2vh;"> <span style="font-size: 2.5vh;">Ages Grouped</span><br>
+<select id="year2" style="height: 5vh; width: 40%;font-size: 2vh;">
     <option value="0">Population 2010</option>
     <option value="1">Population 2011</option>
     <option value="2">Population 2012</option>
     <option value="3">Population 2013</option> 
     <option value="4">Population 2014</option>
 </select>
-<select id="state2">
+<select id="state2" style="height: 5vh; width: 40%; font-size: 2vh;">
     <option value="0">United States</option>
 	<option value="1">Alabama</option>
 	<option value="2">Alaska</option>
@@ -215,8 +215,8 @@
     <option value="104">India</option>
     <option value="105">Zimbambwe</option>
 </select> 
-<p align="left" style="font-size: 20px;">Event Related Population In<span style="color: #FFA500"> Orange</span></p>
-<select id="event2">
+<p align="left" style="font-size: 2vh;">Event Related Population In<span style="color: #FFA500"> Orange</span></p>
+<select id="event2" style="height: 5vh; width: 50%;font-size: 2vh;">
     <option value="0">Select Event</option>
     <option value="14">Elections in India 2014</option>
     <option value="23">Farmer Year Australia 2012</option>
@@ -234,15 +234,15 @@
  <div id="area31" style="width: 100%; height: 40vh;"></div>
  <div id="area32" style="width: 100%; height: 45vh;padding-top: 2vh"></div>
 <div id="ctrl3" style="width: 100%; height: 2vh;padding-top:0;">
-    <input type="checkbox" id="opt3" style="font-size:20px"> Ages Grouped<br>
-<select id="year3">
+    <input type="checkbox" id="opt3" style="width: 2vh; height: 2vh;"><span style="font-size: 2.5vh;">Ages Grouped</span><br>
+<select id="year3" style="height: 5vh; width: 40%;font-size: 2vh;">
     <option value="0">Population 2010</option>
     <option value="1">Population 2011</option>
     <option value="2">Population 2012</option>
     <option value="3">Population 2013</option> 
     <option value="4">Population 2014</option>
 </select>
-<select id="state3">
+<select id="state3" style="height: 5vh; width: 40%;font-size: 2vh;">
     <option value="0">United States</option>
 	<option value="1">Alabama</option>
 	<option value="2">Alaska</option>
@@ -301,8 +301,8 @@
     <option value="104">India</option>
     <option value="105">Zimbambwe</option>
 </select>  
-<p align="left" style="font-size: 20px;">Event Related Population In<span style="color: #FFA500"> Orange</span></p>
-<select id="event3">
+<p align="left" style="font-size: 2vh;">Event Related Population In<span style="color: #FFA500"> Orange</span></p>
+<select id="event3" style="height: 5vh; width: 50%;font-size: 2vh;">
     <option value="0">Select Event</option>
     <option value="14">Elections in India 2014</option>
     <option value="23">Farmer Year Australia 2012</option>
@@ -416,17 +416,17 @@ var svg = d3.select("#area1").append("svg")
     
    
     d3.selectAll("g")
-      .attr("font-size",function(d) { return Math.min(height,width)/20 + "px"; });
-    
+      .attr("font-size",function(d) { return Math.min(height,width)/20 - 20 + "px"; });
+    console.log(Math.min(height,width)/20);
   var gy = svg.append("g")
     .attr("class", "y axis")
     .call(yAxis);
   gy.selectAll("g").filter(function(d) { return d; })
     .classed("minor", true);
   gy.selectAll("text")
-    .attr("x", -23)
+    .attr("x", -28)
     .attr("dy", 4)
-    .attr("font-size",function(d) { return Math.min(height,width)/20 + "px"; });
+    .attr("font-size",function(d) { return Math.min(height,width)/20 - 20 + "px"; });
   
     //....................................Pie Chart..........................
 var width2 = $('#area2').width(),
@@ -648,7 +648,7 @@ var svg2 = d3.select("#area22").append("svg")
       .attr("height", function(d) { return height - y(d.pop10); });
    
     d3.selectAll("g")
-      .attr("font-size", function(d) { return Math.min(height,width)/20 + "px"; });
+      .attr("font-size", function(d) { return Math.min(height,width)/20 - 20 + "px"; });
     
   var gy = svg.append("g")
     .attr("class", "y axis")
@@ -656,9 +656,9 @@ var svg2 = d3.select("#area22").append("svg")
   gy.selectAll("g").filter(function(d) { return d; })
     .classed("minor", true);
   gy.selectAll("text")
-    .attr("x", -23)
+    .attr("x", -28)
     .attr("dy", 4)
-    .attr("font-size",function(d) { return Math.min(height,width)/20 + "px"; });
+    .attr("font-size",function(d) { return Math.min(height,width)/20 - 20 + "px"; });
     
  var g2= svg2.selectAll(".arc")
       .data(pie(usnest))
@@ -828,7 +828,7 @@ var svg2 = d3.select("#area32").append("svg")
   if(flag == 1)
   {
   var usnest=d3.nest()
-     .key(function(d){return d.property;}).rollup(function(hmm){return { gpop:              d3.sum(hmm,function(d){ return parseInt(d.pop10);})}}).entries(usnest);
+     .key(function(d){return d.property;}).rollup(function(hmm){return { gpop:d3.sum(hmm,function(d){ return parseInt(d.pop10);})}}).entries(usnest);
    usnest.forEach(function(d){
       d.age= +d.key;
       d.pop10= +d.values.gpop;
@@ -856,7 +856,7 @@ var svg2 = d3.select("#area32").append("svg")
       .attr("height", function(d) { return height - y(d.pop10); });
    
     d3.selectAll("g")
-      .attr("font-size",function(d) { return Math.min(height,width)/20 + "px"; } );
+      .attr("font-size",function(d) { return Math.min(height,width)/20 - 20 + "px"; } );
     
   var gy = svg.append("g")
     .attr("class", "y axis")
@@ -864,9 +864,9 @@ var svg2 = d3.select("#area32").append("svg")
   gy.selectAll("g").filter(function(d) { return d; })
     .classed("minor", true);
   gy.selectAll("text")
-    .attr("x", -23)
+    .attr("x", -28)
     .attr("dy", 4)
-    .attr("font-size",function(d) { return Math.min(height,width)/20 + "px"; });
+    .attr("font-size",function(d) { return Math.min(height,width)/20 - 20 + "px"; });
     var g2= svg2.selectAll(".arc")
       .data(pie(usnest))
     .enter().append("g")
